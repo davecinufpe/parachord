@@ -17,8 +17,11 @@ struct BounceEffectView: View {
     @State var message: String = ""// Recebe a mensagem por binding
 
     @State private var firstTimer: Bool = true
-
-
+    
+    @State var attempts: Int = 0
+    @State var correctAttempts: Int = 0
+    let ATTEMPT_COUNTER: Int = 7
+    @State var scoreSheet: Bool = false
 
     let bounceHeight: CGFloat = 20 // Raio do balanço
 
@@ -53,8 +56,11 @@ struct BounceEffectView: View {
 
                 BotoesNotas(parachutistPosition: $parachutistPosition, actionMoveParachutist: actionMoveParachutist, firstTimer: $firstTimer)
             }
-        }
+        }.sheet(isPresented: $scoreSheet) {ScoreSheetView(resultText: "\(correctAttempts)/\(attempts)")}
     }
+    
+
+    
     
     // Inicia a queda inicial do paraquedista
     func startInitialFall() {
@@ -95,8 +101,16 @@ struct BounceEffectView: View {
         
         parachutistPosition = CGPoint(x: 400, y: 400)
         
+        attempts += 1
+        if attempts == 7 {
+            scoreSheet = true
+        }
+        
         if isCorrect {
             parachutistImage = "paraquedista_com_paraquedas_aberto"
+            correctAttempts += 1
+            
+
             
             withAnimation(
                 Animation.linear(duration: 2.5)

@@ -146,6 +146,7 @@ struct BotoesNotas: View {
         startTimer() // Inicia um novo timer
     }
     
+    
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             // Certificando-se de que o código que acessa o estado será executado no thread principal
