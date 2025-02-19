@@ -23,7 +23,7 @@ struct BounceEffectView: View {
     let ATTEMPT_COUNTER: Int = 7
     @State var scoreSheet: Bool = false
 
-    let bounceHeight: CGFloat = 20 // Raio do balanço
+    let BOUNCE_HEIGHT: CGFloat = 20 // Raio do balanço
 
     var body: some View {
         ZStack {
@@ -56,11 +56,11 @@ struct BounceEffectView: View {
 
                 BotoesNotas(parachutistPosition: $parachutistPosition, actionMoveParachutist: actionMoveParachutist, firstTimer: $firstTimer)
             }
-        }.sheet(isPresented: $scoreSheet) {ScoreSheetView(resultText: "\(correctAttempts)/\(attempts)")}
+        }.sheet(isPresented: $scoreSheet) {ScoreSheetView(resultText: "\(correctAttempts)/\(attempts)")
+}
     }
     
 
-    
     
     // Inicia a queda inicial do paraquedista
     func startInitialFall() {
@@ -76,7 +76,7 @@ struct BounceEffectView: View {
         withAnimation(
             Animation.easeInOut(duration: 0.7).repeatForever(autoreverses: true)
         ) {
-            offset = -bounceHeight
+            offset = -BOUNCE_HEIGHT
         }
     }
     
@@ -94,6 +94,7 @@ struct BounceEffectView: View {
         }
     }
 
+    
     
     
     

@@ -139,6 +139,12 @@ struct BotoesNotas: View {
         }
     }
     
+    func pauseGame() {
+         isGamePaused = true // Impede interações com os botões e pausa o timer
+         timer?.invalidate() // Para o timer
+     }
+    
+    
     // Função para reiniciar o timer
     func resetTimer() {
         remainingTime = 15
