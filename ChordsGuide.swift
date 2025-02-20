@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CustomButtonWhiteNotesCG: View {
+    
+    
     var title: String
     var action: () -> Void
     
@@ -49,6 +51,8 @@ struct CustomButtonBlackNotesCG: View {
 
 struct ChordsGuideView: View {
     
+    @Binding var path: NavigationPath
+    
     // Adicionando os acordes acidentados (com # e b)
     let chords: [String: [String]] = [
         "C Major": ["C", "E", "G"],
@@ -70,17 +74,24 @@ struct ChordsGuideView: View {
         
         ZStack {
             
+            
             Color("bg").edgesIgnoringSafeArea(.all)
             
             
             VStack(spacing: 16) {
                 
-                Text("Chords Guide")
-                    .font(.largeTitle)
-                    .padding()
                 
                 ScrollView {
                     VStack(spacing: 20) {
+                        
+                        Text("Chords Guide")
+                            .font(.title)
+                            .foregroundColor(.blue)
+                        
+                        Text(" A triad is a chord made up of three notes, with a third interval between them")
+                            .font(.largeTitle)
+                            .padding()
+                        
                         // Loop para criar a lista de acordes
                         ForEach(chords.keys.sorted(), id: \.self) { chord in
                             HStack  {
@@ -104,33 +115,28 @@ struct ChordsGuideView: View {
                                         }
                                     } else {
                                         CustomButtonWhiteNotesCG(title: note) {
-                                            // Ação do botão de nota natural
+                                            // Ação do botão de nota natural@                                        }
                                         }
                                     }
                                 }
+                                .padding(.horizontal)
                             }
-                            .padding(.horizontal)
                         }
+                        
                     }
-                  
+                }//
+                Button(action: {
+                    path.append(Fluxo.StartGame)                }) {
+                    Text("Start")
+                        .font(.system(.body, design: .monospaced))
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
-            }//
-            Button(action: {
-                // Ação do botão Start
-            }) {
-                Text("Start")
-                    .font(.system(.body, design: .monospaced))
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                .padding()
             }
-            .padding()
         }
     }
-}
-
-#Preview {
-    ChordsGuideView()
 }

@@ -8,7 +8,10 @@
 import SwiftUI
 
 enum Fluxo: Hashable {
-    case inicio
+    case FirstView
+    case HowToPlay
+    case ChordsGuide
+    case StartGame
 }
 
 struct OnBoardingView: View {
@@ -32,7 +35,7 @@ struct OnBoardingView: View {
                     VStack {
                         
                         Button(action: {
-                            path.append(Fluxo.inicio)
+                            path.append(Fluxo.HowToPlay)
                         }) {
                             Text("How to play")
                             
@@ -45,7 +48,7 @@ struct OnBoardingView: View {
                             
                         }
                         Button(action: {
-                            path.append(Fluxo.inicio)
+                            path.append(Fluxo.StartGame)
                         }) {
                             Text("PLAY")
                                 .font(.system(.body, design: .monospaced))
@@ -56,9 +59,15 @@ struct OnBoardingView: View {
                                 .cornerRadius(50)
                         }
                         .navigationDestination(for: Fluxo.self ){
-                            rota in switch rota {
-                            case .inicio:
-                                BounceEffectView()
+                            fluxo in switch fluxo {
+                            case .FirstView:
+                                OnBoardingView()
+                            case .HowToPlay:
+                                HowToPlay(path: $path)
+                            case .ChordsGuide:
+                                ChordsGuideView(path: $path)
+                            case .StartGame:
+                                MainGameView(path: $path)
                             }
                         }
                         
@@ -67,9 +76,16 @@ struct OnBoardingView: View {
                 }.border(Color.black, width: 1)
                     .padding()
                     .navigationDestination(for: Fluxo.self ){
-                        rota in switch rota {
-                        case .inicio:
-                            HowToPlay()
+                        fluxo in switch fluxo {
+                        case .FirstView:
+                            OnBoardingView()
+                        case .HowToPlay:
+                            HowToPlay(path: $path)
+                        case .ChordsGuide:
+                            ChordsGuideView(path: $path)
+                        case .StartGame:
+                            MainGameView( path: $path)
+                         
                         }
                     }
             }

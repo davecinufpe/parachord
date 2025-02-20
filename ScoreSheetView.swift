@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-
-
 struct ScoreSheetView: View {
     
+    @Binding var path: NavigationPath
+    
     @State var resultText: String
-    @State private var path = false
+    
+    @Environment(\.dismiss) var dismiss
+  
     
     var body: some View {
         
@@ -21,11 +23,7 @@ struct ScoreSheetView: View {
             Text("\(resultText)")
                 .font(.system(.title3, design: .monospaced)) // Fonte monospaced
                 .foregroundColor(.black)
-            
-            Text("Você acertou")
-                .font(.system(.title, design: .monospaced))
-                .padding()// Fonte monospaced
-            
+   
             
             Spacer()
             
@@ -33,7 +31,8 @@ struct ScoreSheetView: View {
             VStack(spacing: 20) {
                 // Botão Voltar para o Jogo
                 Button(action: {
-                    path = true                    // Simulando o retorno para o jogo
+                    dismiss()
+                    path.append(Fluxo.StartGame)
                 }) {
                     Text("Play again")
                         .font(.system(.body, design: .monospaced))
@@ -42,13 +41,13 @@ struct ScoreSheetView: View {
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
-                }.navigationDestination(isPresented: $path) {
-                    BounceEffectView()
+                
                 }
                 
                 
                 Button(action: {
-                    path = true
+                    dismiss()
+                    path.append(Fluxo.ChordsGuide)
                 }) {
                     Text("Chords Guide")
                         .font(.system(.body, design: .monospaced))
@@ -58,12 +57,11 @@ struct ScoreSheetView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
-                .navigationDestination(isPresented: $path) {
-                    BounceEffectView()
-                }
+               
                     
                     Button(action: {
-                        path = true
+                        dismiss()
+                        path.append(Fluxo.FirstView)
                     }) {
                         Text("Sair")
                             .font(.system(.body, design: .monospaced))
@@ -73,9 +71,7 @@ struct ScoreSheetView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-                    .navigationDestination(isPresented: $path) {
-                        OnBoardingView()
-                    }
+                 
                     .padding()
                     
                     Spacer()
@@ -87,3 +83,4 @@ struct ScoreSheetView: View {
             }
         }
 }
+

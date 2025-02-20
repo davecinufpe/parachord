@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct HowToPlay: View {
+    
+    @Binding var path: NavigationPath
+    
     var body: some View {
+        
         
         ZStack {
             Color("bg").edgesIgnoringSafeArea(.all)
@@ -38,7 +42,7 @@ struct HowToPlay: View {
                     .frame( width: 150, height: 300)
                 
                 Button(action: {
-                    
+                    path.append(Fluxo.StartGame)
                 }) {
                     Text("PLAY")
                         .font(.system(.body, design: .monospaced))
@@ -51,7 +55,7 @@ struct HowToPlay: View {
                 
                 
                 Button(action: {
-                    
+                    path.append(Fluxo.ChordsGuide)
                 }) {
                     Text("Chords Guide")
                         
@@ -64,14 +68,9 @@ struct HowToPlay: View {
 
                 }
                 
-            }.border(Color.accentColor, width: 2)
+            }
             
-                
-                
         }
     }
 }
 
-#Preview {
-    HowToPlay()
-}

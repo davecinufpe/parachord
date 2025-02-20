@@ -79,11 +79,16 @@ struct BotoesNotas: View {
 
     
     var body: some View {
-        VStack {
+     
             
             Text("Chord: \(firstNote)")
                 .frame(alignment: .center)
                 .font(.title)
+        
+            Spacer()
+        
+        VStack {
+          
               
             HStack {
                 TimerView(remainingTime: $remainingTime)
@@ -136,6 +141,9 @@ struct BotoesNotas: View {
             if newPosition == CGPoint(x: 490, y: 100) {
                 resetTimer() // Reinicia o timer quando o paraquedista volta à posição inicial
             }
+        }
+        .onChange(of: isGamePaused) { newValue in
+            pauseGame()
         }
     }
     
@@ -251,12 +259,15 @@ struct BotoesNotas: View {
             actionMoveParachutist(false) // Move o paraquedista para a posição de erro
        
            }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.generateNewSequence() // Gera uma nova sequência após o acerto
-            resetTimer()
-        }
+        if !isGamePaused {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.generateNewSequence() // Gera uma nova sequência após o acerto
+                resetTimer()
+            }
+            
         }
     }
+}
 
 
 

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BounceEffectView: View {
+struct MainGameView: View {
     @State private var offset: CGFloat = 0
     @State private var parachutistPosition = CGPoint(x: 420, y: 60) // Posição inicial do paraquedista
     @State private var parachutistImage = "skydiver" // Imagem inicial do paraquedista
@@ -21,13 +21,14 @@ struct BounceEffectView: View {
     
     @State var attempts: Int = 0
     @State var correctAttempts: Int = 0
-    let ATTEMPT_COUNTER: Int = 7
+    let ATTEMPT_COUNTER: Int = 2
     @State var scoreSheet: Bool = false
 
     let BOUNCE_HEIGHT: CGFloat = 20 // Raio do balanço
 
     @State private var rotationAngle: Angle = .degrees(0)
     
+    @Binding var path: NavigationPath
 
 
     var body: some View {
@@ -65,13 +66,12 @@ struct BounceEffectView: View {
             }
         }.sheet(isPresented: $scoreSheet) {
       
-            ScoreSheetView(resultText: "\(correctAttempts)/\(attempts)")
+            ScoreSheetView(path: $path, resultText: "\(correctAttempts)/\(attempts)")
             
 }
         
     }
-    
-  
+   
     
     // Inicia a queda inicial do paraquedista
     func startInitialFall() {
@@ -114,8 +114,10 @@ struct BounceEffectView: View {
         parachutistPosition = CGPoint(x: 400, y: 400)
         
         attempts += 1
-        if attempts == 7 {
+        if attempts == ATTEMPT_COUNTER {
+            isGamePaused = true
             scoreSheet = true
+            
         }
         
         
@@ -170,12 +172,8 @@ struct BounceEffectView: View {
             
         }
     }
-
-    }
-
-
-
-#Preview {
-//    BounceEffectView(message: .constant("Você acertou! 🎉"))
-    BounceEffectView()
+    
 }
+
+
+
