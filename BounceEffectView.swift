@@ -15,6 +15,7 @@ struct BounceEffectView: View {
     @State private var moveParachutist = false // Controla a animação de queda do paraquedista
     
     @State var message: String = ""// Recebe a mensagem por binding
+    @State var isGamePaused: Bool = false 
 
     @State private var firstTimer: Bool = true
     
@@ -24,6 +25,10 @@ struct BounceEffectView: View {
     @State var scoreSheet: Bool = false
 
     let BOUNCE_HEIGHT: CGFloat = 20 // Raio do balanço
+
+    @State private var rotationAngle: Angle = .degrees(0)
+    
+
 
     var body: some View {
         ZStack {
@@ -39,10 +44,12 @@ struct BounceEffectView: View {
                 
          
                 Image(parachutistImage)
-                    .resizable()
+                    .resizable()    // Resetando a rotação para 0
+
                     .frame(width: parachutistImage == "paraquedista_com_paraquedas_aberto" ? 250 : 110, // Tamanho maior quando a imagem for paraquedas aberto
                                height: parachutistImage == "paraquedista_com_paraquedas_aberto" ? 260 : 50) // Tamanho maior
-                    
+                     .rotationEffect(rotationAngle) // Aplica a rotação somente quando necessário
+
                     .offset(y: offset) // Efeito de balanço
                     .position(parachutistPosition)
                     .onAppear {
@@ -54,13 +61,17 @@ struct BounceEffectView: View {
                 
                 Spacer()
 
-                BotoesNotas(parachutistPosition: $parachutistPosition, actionMoveParachutist: actionMoveParachutist, firstTimer: $firstTimer)
+                BotoesNotas(parachutistPosition: $parachutistPosition, actionMoveParachutist: actionMoveParachutist, isGamePaused: $isGamePaused, firstTimer: $firstTimer)
             }
-        }.sheet(isPresented: $scoreSheet) {ScoreSheetView(resultText: "\(correctAttempts)/\(attempts)")
+        }.sheet(isPresented: $scoreSheet) {
+      
+            ScoreSheetView(resultText: "\(correctAttempts)/\(attempts)")
+            
 }
+        
     }
     
-
+  
     
     // Inicia a queda inicial do paraquedista
     func startInitialFall() {
@@ -90,7 +101,7 @@ struct BounceEffectView: View {
         withAnimation(
             Animation.linear(duration: 4)
         ) {
-            parachutistPosition = CGPoint(x: parachutistPosition.x - 10, y: parachutistPosition.y + 10)
+            parachutistPosition = CGPoint(x: parachutistPosition.x - 30, y: parachutistPosition.y + 10)
         }
     }
 
@@ -107,6 +118,8 @@ struct BounceEffectView: View {
             scoreSheet = true
         }
         
+        
+        
         if isCorrect {
             parachutistImage = "paraquedista_com_paraquedas_aberto"
             correctAttempts += 1
@@ -116,7 +129,7 @@ struct BounceEffectView: View {
             withAnimation(
                 Animation.linear(duration: 2.5)
             ) {
-                parachutistPosition = CGPoint(x: parachutistPosition.x - 580, y: parachutistPosition.y + 700) // Paraquedista vai para a esquerda
+                parachutistPosition = CGPoint(x: parachutistPosition.x - 880, y: parachutistPosition.y + 700) // Paraquedista vai para a esquerda
             }
         } else {
             // Erro: Move para a direita
@@ -124,13 +137,15 @@ struct BounceEffectView: View {
             withAnimation(
                 Animation.linear(duration: 2.5)
             ) {
-                parachutistPosition = CGPoint(x: parachutistPosition.x + 1240, y: parachutistPosition.y + 1400) // Paraquedista vai para a direita
+                parachutistPosition = CGPoint(x: parachutistPosition.x + 1940, y: parachutistPosition.y + 1800) // Paraquedista vai para a direita
             }
             
             // Adiciona a rotação quando o paraquedista vai para a direita
             withAnimation(
                 Animation.linear(duration: 1.5).repeatForever(autoreverses: false)
+                
             ) {
+               
                
         
             }
@@ -150,6 +165,9 @@ struct BounceEffectView: View {
             // Reinicia a animação de balanço (verifique se a animação está acontecendo novamente)
                     offset = 0 // Reinicia o offset para garantir que o efeito de balanço aconteça desde o início
                     startBouncing()     // Inicia o balanço
+            
+           
+            
         }
     }
 

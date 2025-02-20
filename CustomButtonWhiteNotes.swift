@@ -64,7 +64,7 @@ struct BotoesNotas: View {
     
     @State private var showErrorSheet: Bool = false // Controle para mostrar a sheet de erro
     @State private var errorMessage: String = "" // Mensagem de erro com a sequência correta
-    @State private var isGamePaused: Bool = false // Controle para pausar o jogo
+   @Binding var isGamePaused: Bool // Controle para pausar o jogo
     
     private let allWhiteNotes = ["C", "D", "E", "F", "G", "A", "B"]
     private let allBlackNotes = ["C#", "D#", "F#", "G#", "A#"]
@@ -212,17 +212,17 @@ struct BotoesNotas: View {
         if !isGamePaused {
             let chords: [String: [[String]]] = [
                 "C": [["C", "E", "G"], ["C", "G", "E"], ["E", "C", "G"], ["E", "G", "C"], ["G", "C", "E"], ["G", "E", "C"]],
-                "D": [["D", "F", "A"], ["D", "A", "F"], ["F", "D", "A"], ["F", "A", "D"], ["A", "D", "F"], ["A", "F", "D"]],
-                "E": [["E", "G", "B"], ["E", "B", "G"], ["G", "E", "B"], ["G", "B", "E"], ["B", "E", "G"], ["B", "G", "E"]],
+                "D": [["D", "F#", "A"], ["D", "A", "F#"], ["F#", "D", "A"], ["F#", "A", "D"], ["A", "D", "F#"], ["A", "F#", "D"]],
+                "E": [["E", "G#", "B"], ["E", "B", "G#"], ["G#", "E", "B"], ["G#", "B", "E"], ["B", "E", "G#"], ["B", "G#", "E"]],
                 "F": [["F", "A", "C"], ["F", "C", "A"], ["A", "F", "C"], ["A", "C", "F"], ["C", "F", "A"], ["C", "A", "F"]],
                 "G": [["G", "B", "D"], ["G", "D", "B"], ["B", "G", "D"], ["B", "D", "G"], ["D", "G", "B"], ["D", "B", "G"]],
-                "A": [["A", "C", "E"], ["A", "E", "C"], ["C", "A", "E"], ["C", "E", "A"], ["E", "A", "C"], ["E", "C", "A"]],
-                "B": [["B", "D", "F#"], ["B", "F#", "D"], ["D", "B", "F#"], ["D", "F#", "B"], ["F#", "B", "D"], ["F#", "D", "B"]],
-                "C#": [["C#", "F", "G#"], ["C#", "G#", "F"], ["F", "C#", "G#"], ["F", "G#", "C#"], ["G#", "C#", "F"], ["G#", "F", "C#"]],
+                "A": [["A", "C#", "E"], ["A", "E", "C#"], ["C#", "A", "E"], ["C#", "E", "A"], ["E", "A", "C#"], ["E", "C#", "A"]],
+                "B": [["B", "D#", "F#"], ["B", "F#", "D#"], ["D#", "B", "F#"], ["D#", "F#", "B"], ["F#", "B", "D#"], ["F#", "D#", "B"]],
+                "C#": [["C#", "F", "G#"], ["C#", "G#", "F#"], ["F", "C#", "G#"], ["F#", "G#", "C#"], ["G#", "C#", "F#"], ["G#", "F#", "C#"]],
                 "D#": [["D#", "G", "A#"], ["D#", "A#", "G"], ["G", "D#", "A#"], ["G", "A#", "D#"], ["A#", "D#", "G"], ["A#", "G", "D#"]],
                 "F#": [["F#", "A#", "C#"], ["F#", "C#", "A#"], ["A#", "F#", "C#"], ["A#", "C#", "F#"], ["C#", "F#", "A#"], ["C#", "A#", "F#"]],
                 "G#": [["G#", "B", "D#"], ["G#", "D#", "B"], ["B", "G#", "D#"], ["B", "D#", "G#"], ["D#", "G#", "B"], ["D#", "B", "G#"]],
-                "A#": [["A#", "C", "F"], ["A#", "F", "C"], ["C", "A#", "F"], ["C", "F", "A#"], ["F", "A#", "C"], ["F", "C", "A#"]]
+                "A#": [["A#", "D", "F"], ["A#", "F", "D"], ["D", "A#", "F"], ["D", "F", "A#"], ["F", "A#", "D"], ["F", "D", "A#"]]
             ]
 
             // Combine as notas brancas e pretas em um único array
@@ -279,7 +279,7 @@ struct TimerView: View {
 
 
 #Preview {
-    BotoesNotas(parachutistPosition: .constant(CGPoint(x: 490, y: 100)), actionMoveParachutist: { _ in }, firstTimer: .constant(true))
+    BotoesNotas(parachutistPosition: .constant(CGPoint(x: 490, y: 100)), actionMoveParachutist: { _ in }, isGamePaused: .constant(true), firstTimer: .constant(true))
 }
 
 

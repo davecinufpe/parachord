@@ -12,19 +12,20 @@ import SwiftUI
 struct ScoreSheetView: View {
     
     @State var resultText: String
-    
     @State private var path = false
     
     var body: some View {
         
         VStack {
-            Text("Você acertou")
-                .font(.system(.title, design: .monospaced))
-                .padding()// Fonte monospaced
             
             Text("\(resultText)")
                 .font(.system(.title3, design: .monospaced)) // Fonte monospaced
                 .foregroundColor(.black)
+            
+            Text("Você acertou")
+                .font(.system(.title, design: .monospaced))
+                .padding()// Fonte monospaced
+            
             
             Spacer()
             
@@ -49,7 +50,7 @@ struct ScoreSheetView: View {
                 Button(action: {
                     path = true
                 }) {
-                    Text("Chord Guide")
+                    Text("Chords Guide")
                         .font(.system(.body, design: .monospaced))
                         .padding()
                         .frame(maxWidth: .infinity)

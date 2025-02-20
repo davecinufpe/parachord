@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Rota: Hashable {
+enum Fluxo: Hashable {
     case inicio
 }
 
@@ -24,7 +24,6 @@ struct OnBoardingView: View {
                 Color("bg").edgesIgnoringSafeArea(.all)
                 
                 
-                
                 HStack () {
                     Text("Welcome to Parachord!")
                         .font(.largeTitle)
@@ -33,7 +32,7 @@ struct OnBoardingView: View {
                     VStack {
                         
                         Button(action: {
-                            path.append(Rota.inicio)
+                            path.append(Fluxo.inicio)
                         }) {
                             Text("How to play")
                             
@@ -46,7 +45,7 @@ struct OnBoardingView: View {
                             
                         }
                         Button(action: {
-                            path.append(Rota.inicio)
+                            path.append(Fluxo.inicio)
                         }) {
                             Text("PLAY")
                                 .font(.system(.body, design: .monospaced))
@@ -56,7 +55,7 @@ struct OnBoardingView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(50)
                         }
-                        .navigationDestination(for: Rota.self ){
+                        .navigationDestination(for: Fluxo.self ){
                             rota in switch rota {
                             case .inicio:
                                 BounceEffectView()
@@ -67,7 +66,7 @@ struct OnBoardingView: View {
                     
                 }.border(Color.black, width: 1)
                     .padding()
-                    .navigationDestination(for: Rota.self ){
+                    .navigationDestination(for: Fluxo.self ){
                         rota in switch rota {
                         case .inicio:
                             HowToPlay()
