@@ -84,7 +84,7 @@ struct OnBoardingView: View {
                         case .ChordsGuide:
                             ChordsGuideView(path: $path)
                         case .StartGame:
-                            MainGameView( path: $path)
+                            MainGameView(path: $path)
                          
                         }
                     }

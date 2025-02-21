@@ -21,25 +21,32 @@ struct MainGameView: View {
     
     @State var attempts: Int = 0
     @State var correctAttempts: Int = 0
-    let ATTEMPT_COUNTER: Int = 2
+    let ATTEMPT_COUNTER: Int = 5
     @State var scoreSheet: Bool = false
 
     let BOUNCE_HEIGHT: CGFloat = 20 // Raio do balanço
-
-    @State private var rotationAngle: Angle = .degrees(0)
+    
+    @State private var isRotating: Bool = false
+    @State private var angleDegrees: Double = 0.0
+    
+//    @State private var rotationAngle: Angle = .degrees(0)
     
     @Binding var path: NavigationPath
 
 
     var body: some View {
         ZStack {
+            
             Color("bg").edgesIgnoringSafeArea(.all)
+            
+            CloudsMovingView()
             
             VStack {
         
                 Image("airplane")
                     .resizable()
-                    .frame(width: 320, height: 120)
+                    .frame(width: 420, height: 180)
+                    .padding(.top)
                 
                 Spacer()
                 
@@ -48,15 +55,15 @@ struct MainGameView: View {
                     .resizable()    // Resetando a rotação para 0
 
                     .frame(width: parachutistImage == "paraquedista_com_paraquedas_aberto" ? 250 : 110, // Tamanho maior quando a imagem for paraquedas aberto
-                               height: parachutistImage == "paraquedista_com_paraquedas_aberto" ? 260 : 50) // Tamanho maior
-                     .rotationEffect(rotationAngle) // Aplica a rotação somente quando necessário
+                               height: parachutistImage == "paraquedista_com_paraquedas_aberto" ? 280 : 50) // Tamanho maior
+                    .rotationEffect(Angle(degrees: angleDegrees))
 
                     .offset(y: offset) // Efeito de balanço
                     .position(parachutistPosition)
                     .onAppear {
                         startInitialFall() // Inicia a queda inicial
                         startBouncing() // Inicia o balanço
-                    
+                            
                         
                     }
                 
@@ -130,21 +137,25 @@ struct MainGameView: View {
             
             withAnimation(
                 Animation.linear(duration: 2.5)
+                
             ) {
                 parachutistPosition = CGPoint(x: parachutistPosition.x - 880, y: parachutistPosition.y + 700) // Paraquedista vai para a esquerda
+                
             }
         } else {
             // Erro: Move para a direita
-            parachutistImage = "skydiver" // Pode manter a imagem inicial ou mudar para uma imagem de erro
+            parachutistImage = "skydiver"
+// Pode manter a imagem inicial ou mudar para uma imagem de erro
             withAnimation(
                 Animation.linear(duration: 2.5)
             ) {
                 parachutistPosition = CGPoint(x: parachutistPosition.x + 1940, y: parachutistPosition.y + 1800) // Paraquedista vai para a direita
+                angleDegrees = 720
             }
-            
             // Adiciona a rotação quando o paraquedista vai para a direita
             withAnimation(
                 Animation.linear(duration: 1.5).repeatForever(autoreverses: false)
+                    
                 
             ) {
                
@@ -160,13 +171,14 @@ struct MainGameView: View {
             parachutistImage = "skydiver" // Garantir que a imagem volte para o estado inicial
             
             // Reinicia a posição do paraquedista para o topo
-            parachutistPosition = CGPoint(x: 490, y: 40)
+            parachutistPosition = CGPoint(x: 590, y: 140)
             
             // Reinicia as animações de queda e balanço
             startInitialFall()  // Inicia a queda
             // Reinicia a animação de balanço (verifique se a animação está acontecendo novamente)
                     offset = 0 // Reinicia o offset para garantir que o efeito de balanço aconteça desde o início
                     startBouncing()     // Inicia o balanço
+            angleDegrees = 0
             
            
             

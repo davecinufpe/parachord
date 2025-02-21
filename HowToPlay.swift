@@ -31,7 +31,7 @@ struct HowToPlay: View {
                 
                     .font(.headline)
                     .monospaced()
-                    .frame(width: 400, height: 50)
+                    .frame(width: 400, height: 200)
                     .background(Color.accentColor.opacity(0.2))
                     .cornerRadius(8)
                     .foregroundColor(.black)
