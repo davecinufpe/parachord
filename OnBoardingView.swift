@@ -22,72 +22,67 @@ struct OnBoardingView: View {
         
         NavigationStack(path: $path) {
             
-            ZStack (alignment: .bottomLeading) {
+            ZStack {
                 
-                Color("bg").edgesIgnoringSafeArea(.all)
+                Color("bg").ignoresSafeArea()
                 
+                Image("onboardingImage")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.bottom,120)
                 
-                HStack () {
-                    Text("Welcome to Parachord!")
+                // Texto no canto inferior esquerdo
+                HStack (alignment: .bottom) {
+                    Text("Parachord!")
                         .font(.largeTitle)
                         .bold()
+                        .padding(.leading, 20) // Ajustando a distância da borda
+                }
+                .padding(.bottom, 40) // Ajuste da distância da parte inferior da tela
+                .frame(maxWidth: .infinity, alignment: .bottomLeading)
+
+                
+                VStack (spacing: 20) {
+                    Spacer()
                     
-                    VStack {
-                        
-                        Button(action: {
-                            path.append(Fluxo.HowToPlay)
-                        }) {
-                            Text("How to play")
-                            
-                                .font(.system(.body, design: .monospaced))
-                                .padding()
-                                .frame(width: 400, height: 50)
-                                .background(Color.accentColor)
-                                .foregroundColor(.white)
-                                .cornerRadius(50)
-                            
-                        }
-                        Button(action: {
-                            path.append(Fluxo.StartGame)
-                        }) {
-                            Text("PLAY")
-                                .font(.system(.body, design: .monospaced))
-                                .padding()
-                                .frame(width: 400, height: 50)
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(50)
-                        }
-                        .navigationDestination(for: Fluxo.self ){
-                            fluxo in switch fluxo {
-                            case .FirstView:
-                                OnBoardingView()
-                            case .HowToPlay:
-                                HowToPlay(path: $path)
-                            case .ChordsGuide:
-                                ChordsGuideView(path: $path)
-                            case .StartGame:
-                                MainGameView(path: $path)
-                            }
-                        }
-                        
+                 
+                    Button(action: {
+                        path.append(Fluxo.HowToPlay)
+                    }) {
+                        Text("How\n to play")
+                            .font(.system(.body, design: .monospaced))
+                            .frame(width: 320, height: 120, alignment: .center)
+                            .background(Color.accentColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(50)
+                            .clipShape(Circle()) // Forma circular
+                            .overlay(
+                                Circle().stroke(Color("customButton1"), lineWidth: 2) // Borda do botão
+                            )
+                            .shadow(color: .gray, radius: 2, x: -5, y: 5) // Sombra
                     }
                     
-                }.border(Color.black, width: 1)
-                    .padding()
-                    .navigationDestination(for: Fluxo.self ){
-                        fluxo in switch fluxo {
-                        case .FirstView:
-                            OnBoardingView()
-                        case .HowToPlay:
-                            HowToPlay(path: $path)
-                        case .ChordsGuide:
-                            ChordsGuideView(path: $path)
-                        case .StartGame:
-                            MainGameView(path: $path)
-                         
-                        }
+                  
+                    Button(action: {
+                        path.append(Fluxo.StartGame)
+                    }) {
+                        Text("PLAY")
+                            .font(.system(.body, design: .monospaced))
+                            .padding()
+                            .frame(width: 400, height: 180)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(50)
+                            .clipShape(Circle()) // Forma circular
+                            .overlay(
+                                Circle().stroke(Color("c"), lineWidth: 2) // Borda do botão
+                            )
+                            .shadow(color: .gray, radius: 2, x: -5, y: 5) // Sombra
                     }
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.bottom, 40)
+                
             }
         }
     }

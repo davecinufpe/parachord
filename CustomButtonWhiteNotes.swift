@@ -36,10 +36,10 @@ struct CustomButtonBlackNotes: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.system(size: 20)) // Ajuste o tamanho da letra
-                .foregroundColor(.accentColor) // Cor do texto
-                .frame(width: 72, height: 72) // Tamanho do botão
-                .background(Color("buttonColor2"))// Cor do fundo do botão
+                .font(.system(size: 20))
+                .foregroundColor(.accentColor)
+                .frame(width: 72, height: 72)
+                .background(Color("buttonColor2"))
                 .clipShape(Circle()) // Forma circular
                 .overlay(
                     Circle().stroke(Color("gray"), lineWidth: 2) // Borda do botão
