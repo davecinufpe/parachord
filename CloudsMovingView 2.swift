@@ -14,7 +14,6 @@ struct CloudsMovingView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack {
-                // Primeira imagem
                 cloudImage
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -22,10 +21,10 @@ struct CloudsMovingView: View {
                     .offset(x: self.moveToTheLeft ? geometry.size.width : 0) // Mover para a esquerda
                     .animation(Animation.linear(duration: 30).repeatForever(autoreverses: false), value: moveToTheLeft)
                 
-                // Segunda imagem
+                
             }
             .onAppear {
-                self.moveToTheLeft = true // Inicia a animação para mover para a esquerda quando a view aparecer
+                self.moveToTheLeft = true
             }
         }
         .edgesIgnoringSafeArea(.all)

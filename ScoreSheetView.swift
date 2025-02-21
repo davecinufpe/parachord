@@ -21,9 +21,17 @@ struct ScoreSheetView: View {
         VStack {
             
             Text("\(resultText)")
-                .font(.system(.title3, design: .monospaced)) // Fonte monospaced
-                .foregroundColor(.black)
-   
+                .font(.system(.title, design: .monospaced))
+                .frame(width: 400, height: 180)
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(50)
+                .clipShape(Rectangle())
+                .overlay(
+                    Rectangle().stroke(Color("buttonColor1"), lineWidth: 2)
+                )
+                .shadow(color: .gray, radius: 2, x: -5, y: 5)
+            
             
             Spacer()
             
