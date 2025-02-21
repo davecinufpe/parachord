@@ -5,25 +5,24 @@
 //  Created by Deivson Pereira da Silva on 20/02/25.
 //
 
-
 import SwiftUI
 
 struct CloudsMovingView: View {
     @State private var moveToTheLeft = false
-    let cloudImage = Image("clouds") // Certifique-se de que esta imagem esteja no seu catálogo de assets
+    let cloudImage = Image("clouds")
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                // Primeira imagem começando à direita
+            HStack {
+                // Primeira imagem
                 cloudImage
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geometry.size.width, height: geometry.size.height)
-                    .offset(x: self.moveToTheLeft ? geometry.size.width : 0) // Começando à direita
+                    .offset(x: self.moveToTheLeft ? geometry.size.width : 0) // Mover para a esquerda
                     .animation(Animation.linear(duration: 30).repeatForever(autoreverses: false), value: moveToTheLeft)
                 
-                
+                // Segunda imagem
             }
             .onAppear {
                 self.moveToTheLeft = true // Inicia a animação para mover para a esquerda quando a view aparecer
@@ -38,4 +37,3 @@ struct ContentView_Previews: PreviewProvider {
         CloudsMovingView()
     }
 }
-
