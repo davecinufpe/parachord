@@ -11,7 +11,7 @@ class customFontLoader {
  @MainActor static let shared = FontLoader()
 
  func customFont() {
-  if let cfURL = Bundle.main.url(forResource: "Makasih", withExtension: "ttf") as CFURL? {
+  if let cfURL = Bundle.main.url(forResource: "BungeeShade-Regular", withExtension: "ttf") as CFURL? {
    CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
   }
  }

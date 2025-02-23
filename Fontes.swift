@@ -25,7 +25,7 @@ import SwiftUI
 enum MyCustomFonts: String, CaseIterable {
     
     //e.g, the fonts below:
-    case textFont = "Makasih.ttf"
+    case textFont = "BungeeShade-Regular.ttf"
     var fontName: String { String(self.rawValue.dropLast(4)) }
     var fileExtension: String { String(self.rawValue.suffix(3)) }
 }
