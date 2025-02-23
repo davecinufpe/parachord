@@ -42,9 +42,9 @@ struct CustomButtonBlackNotes: View {
                 .background(Color("buttonColor2"))
                 .clipShape(Circle()) // Forma circular
                 .overlay(
-                    Circle().stroke(Color("gray"), lineWidth: 2) // Borda do botão
+                    Circle().stroke(Color("gray"), lineWidth: 2)
                 )
-                .shadow(color: .gray, radius: 2, x: -5, y: 5) // Sombra
+                .shadow(color: .gray, radius: 2, x: -5, y: 5) 
         }
     }
 }
@@ -55,24 +55,24 @@ struct CustomButtonBlackNotes: View {
 import SwiftUI
 
 struct BotoesNotas: View {
-    @State private var code: [String?] = [nil, nil, nil] // Código preenchido pelo usuário
-    @State private var message: String = "" // Mensagem de acerto ou erro
+    @State private var code: [String?] = [nil, nil, nil]
+    @State private var message: String = ""
     @Binding var parachutistPosition: CGPoint
-    @State private var firstNote: String = "" // Inicializando a variável firstNote
-    var actionMoveParachutist: (Bool) -> Void // Função para mover o paraquedista
+    @State private var firstNote: String = ""
+    var actionMoveParachutist: (Bool) -> Void
     private let notePlayer = Sound()
     
-    @State private var showErrorSheet: Bool = false // Controle para mostrar a sheet de erro
-    @State private var errorMessage: String = "" // Mensagem de erro com a sequência correta
-   @Binding var isGamePaused: Bool // Controle para pausar o jogo
+    @State private var showErrorSheet: Bool = false
+    @State private var errorMessage: String = ""
+   @Binding var isGamePaused: Bool
     
     private let allWhiteNotes = ["C", "D", "E", "F", "G", "A", "B"]
     private let allBlackNotes = ["C#", "D#", "F#", "G#", "A#"]
     
-    @State private var correctSequence: [String] = [] // Sequência correta das notas
+    @State private var correctSequence: [String] = []
     
-    @State private var remainingTime: Int = 15 // Tempo inicial de 15 segundos
-    @State private var timer: Timer? = nil // Timer
+    @State private var remainingTime: Int = 15
+    @State private var timer: Timer? = nil
     @Binding var firstTimer: Bool
     
 
@@ -83,7 +83,8 @@ struct BotoesNotas: View {
             
             Text("Chord: \(firstNote)")
                 .frame(alignment: .center)
-                .font(.title)
+                .font(.custom(MyCustomFonts.secondFont.fontName, size: 24))
+            
         
             Spacer()
         
@@ -107,7 +108,7 @@ struct BotoesNotas: View {
         
             HStack(spacing: 12){
                 ForEach(allBlackNotes, id: \.self) { note in
-                    if note == allBlackNotes[1] { // Se for o segundo botão
+                    if note == allBlackNotes[1] {
                         CustomButtonBlackNotes(title: note, action: {
                             if !isGamePaused {
                                 self.playAndFillCode(note: note)
@@ -129,7 +130,7 @@ struct BotoesNotas: View {
             HStack(spacing: 12) {
                 ForEach(allWhiteNotes, id: \.self) { note in
                     CustomButtonWhiteNotes(title: note) {
-                        if !isGamePaused { // Só permite interagir se o jogo não estiver pausado
+                        if !isGamePaused {
                             self.playAndFillCode(note: note)
                         }
                     }
@@ -162,14 +163,13 @@ struct BotoesNotas: View {
     
     func resetTimer() {
         remainingTime = 15
-        timer?.invalidate() // Para o timer anterior, se houver
-        startTimer() // Inicia um novo timer
+        timer?.invalidate()
+        startTimer()
     }
     
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            // Certificando-se de que o código que acessa o estado será executado no thread principal
             Task { @MainActor in
                 if self.remainingTime > 1 {
                     self.remainingTime -= 1
@@ -239,13 +239,13 @@ struct BotoesNotas: View {
                 "A#": [["A#", "D", "F"], ["A#", "F", "D"], ["D", "A#", "F"], ["D", "F", "A#"], ["F", "A#", "D"], ["F", "D", "A#"]]
             ]
 
-            // Combine as notas brancas e pretas em um único array
+          
             let allNotes = allWhiteNotes + allBlackNotes
             
-            // Escolhe aleatoriamente uma nota das notas brancas e pretas
+           
             self.firstNote = allNotes.randomElement() ?? "C"
             
-            self.firstNote = allNotes.randomElement() ?? "C" // Define a primeira nota
+            self.firstNote = allNotes.randomElement() ?? "C"
             self.correctSequence = chords[firstNote]?.randomElement() ?? ["C", "E", "G"]
             self.code = [nil, nil, nil]
             self.message = ""
@@ -253,21 +253,21 @@ struct BotoesNotas: View {
     }
     
     func checkSequence(code: [String?]) {
-        let userSet = Set(code.compactMap { $0 }) // Converte para Set, ignorando nil
+        let userSet = Set(code.compactMap { $0 })
         let correctSet = Set(correctSequence)
         
         if userSet == correctSet {
             message = "Thank you!"
-            actionMoveParachutist(true) // Move o paraquedista para a posição correta em caso de acerto
+            actionMoveParachutist(true)
            
         } else {
             message = "Noooooooo"
-            actionMoveParachutist(false) // Move o paraquedista para a posição de erro
+            actionMoveParachutist(false)
        
            }
         if !isGamePaused {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.generateNewSequence() // Gera uma nova sequência após o acerto
+                self.generateNewSequence()
                 resetTimer()
             }
             
@@ -276,14 +276,12 @@ struct BotoesNotas: View {
 }
 
 
-
-// View customizada para o Timer
 struct TimerView: View {
     @Binding var remainingTime: Int
     
     var body: some View {
         Text(String(format: "%02d:%02d", remainingTime / 60, remainingTime % 60))  .font(.system(size: 24))
-            .foregroundColor(.black) // Cor do texto
+            .foregroundColor(.black)
             .font(.largeTitle)
             .monospaced()
             .frame(width: 120, height: 50)

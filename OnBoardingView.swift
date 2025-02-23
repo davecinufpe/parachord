@@ -42,9 +42,7 @@ struct OnBoardingView: View {
                 }
                 .padding(.top, 492)
                 .frame(maxWidth: .infinity, alignment: .bottom)
-                
-                
-                
+        
                 
                 HStack (spacing: 20){
                     Spacer()
@@ -53,8 +51,7 @@ struct OnBoardingView: View {
                         path.append(Fluxo.HowToPlay)
                     }) {
                         Text("How to play")
-                            .font(.system(.body, design: .monospaced))
-                            .frame(width: 240, height: 60)
+                            .font(.custom(MyCustomFonts.secondFont.fontName, size: 18))                            .frame(width: 240, height: 60)
                             .background(Color("buttonColor"))
                             .foregroundColor(.black)
                             .cornerRadius(12)
@@ -66,7 +63,7 @@ struct OnBoardingView: View {
                         path.append(Fluxo.StartGame)
                     }) {
                         Text("PLAY")
-                            .font(.system(.body, design: .monospaced))
+                            .font(.custom(MyCustomFonts.secondFont.fontName, size: 18))
                             .frame(width: 240, height: 60)
                             .background(Color("buttonColor"))
                             .foregroundColor(.black)
@@ -87,7 +84,6 @@ struct OnBoardingView: View {
                             MainGameView(path: $path)
                         }
                     }
-                    
                     
                 }
                 

@@ -13,7 +13,7 @@ struct Textfields: View {
     var body: some View {
         HStack {
             ForEach(code, id: \.self) { note in
-                Text(note ?? "_") // Mostra a nota ou _ se for nil
+                Text(note ?? "_") 
                     .font(.title)
                     .frame(width: 50, height: 50)
                     .background(Color.gray.opacity(0.2))

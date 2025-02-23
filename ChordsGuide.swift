@@ -50,12 +50,12 @@ struct ChordsGuideView: View {
 
                     
                     VStack {
-                        Text("Each button here represents a note and the interval between them is a semitone. \nSince Josh's parachute is only released with major chords, it’s important to know that a major chord consists of: \nThe root, which shares its name with the chord being formed. \nThe third, an interval of 4 semitones from the root. \nThe fifth, an interval of 3 semitones from the third.")
+                        Text("Each button here represents a note and the interval between them is a semitone. \nSince Josh's parachute is only released with major chords, it’s important to know that a major chord consists of:\n \n1.The root, which shares its name with the chord being formed; \n2.The third, an interval of 4 semitones from the root; \n3.The fifth, an interval of 3 semitones from the third.")
                             .font(.custom(MyCustomFonts.secondFont.fontName, size: 18))
                             .foregroundStyle(Color("buttonColor2"))
                            
                         
-                    }
+                    }.padding(.vertical, 24)
                     
                     HStack {
                         

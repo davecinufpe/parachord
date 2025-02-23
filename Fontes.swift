@@ -18,20 +18,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 
 import SwiftUI
 
-/// A type for your custom fonts.
-///
-/// When you use this type, don't forget to add
-/// a case for each custom font you need as given in the example.
 enum MyCustomFonts: String, CaseIterable {
     
-    // Add your custom fonts here
+   
     case textFont = "BungeeShade-Regular.ttf"
-    case secondFont = "IBMPlexMono-Regular.ttf"  // Adicionando a nova fonte
+    case secondFont = "IBMPlexMono-Regular.ttf"
     
-    // Get the font name by removing the ".ttf" extension
+    
     var fontName: String { String(self.rawValue.dropLast(4)) }
     
-    // Get the file extension (e.g. "ttf")
+ 
     var fileExtension: String { String(self.rawValue.suffix(3)) }
 }
 
