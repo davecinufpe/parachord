@@ -105,19 +105,28 @@ struct BotoesNotas: View {
                 .monospaced()
             
         
-            HStack {
+            HStack(spacing: 12){
                 ForEach(allBlackNotes, id: \.self) { note in
-                    CustomButtonBlackNotes(title: note, action: {
-                        if !isGamePaused {
-                            self.playAndFillCode(note: note)
-                        }
-                    })
+                    if note == allBlackNotes[1] { // Se for o segundo botão
+                        CustomButtonBlackNotes(title: note, action: {
+                            if !isGamePaused {
+                                self.playAndFillCode(note: note)
+                            }
+                        })
+                        .padding(.trailing, 80)
+                    } else {
+                        CustomButtonBlackNotes(title: note, action: {
+                            if !isGamePaused {
+                                self.playAndFillCode(note: note)
+                            }
+                        })
+                    }
                 }
             }
-            .padding()
-            
+
+            .padding(.top, 12)
          
-            HStack {
+            HStack(spacing: 12) {
                 ForEach(allWhiteNotes, id: \.self) { note in
                     CustomButtonWhiteNotes(title: note) {
                         if !isGamePaused { // Só permite interagir se o jogo não estiver pausado
@@ -125,10 +134,8 @@ struct BotoesNotas: View {
                         }
                     }
                 }
-        
-       
                 
-            }
+            } .padding(.bottom, 24)
         }
         .onAppear {
             self.generateNewSequence()

@@ -88,7 +88,7 @@ struct ChordsGuideView: View {
                             .font(.title)
                             .foregroundColor(.blue)
                         
-                        Text(" A triad is a chord made up of three notes, with a third interval between them.")
+                        Text(" A triad is a chord made up of three notes, with specific intervals between them.")
                             .font(.system(.body, design: .monospaced))
                         
                         // Loop para criar a lista de acordes
