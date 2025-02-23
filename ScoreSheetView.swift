@@ -14,44 +14,45 @@ struct ScoreSheetView: View {
     @State var resultText: String
     
     @Environment(\.dismiss) var dismiss
-  
+    
     
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            Text("\(resultText)")
-                .font(.system(.title, design: .monospaced))
-                .frame(width: 400, height: 180)
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(50)
-                .clipShape(Rectangle())
-                .overlay(
-                    Rectangle().stroke(Color("buttonColor1"), lineWidth: 2)
-                )
-                .shadow(color: .gray, radius: 2, x: -5, y: 5)
+            Image("sheetBanner")
+                .resizable()
+                .frame(width: 700, height: 700)
+                .padding(.leading, 20)
+            
+            VStack {
+                Text("\(resultText)")
+                    .font(.system(size: 70))
+                    .fontWeight(.bold)
+                    .frame(width: 180, height: 80)
+                    .foregroundColor(.accentColor)
+                
+            }
+            //            .border(Color.red, width: 2)
+            .padding(.leading, -230)
+            .padding(.top, 240)
             
             
-            Spacer()
             
-            // Botões
-            VStack(spacing: 20) {
-                // Botão Voltar para o Jogo
+            VStack (spacing: 12){
                 Button(action: {
                     dismiss()
                     path.append(Fluxo.StartGame)
                 }) {
                     Text("Play again")
                         .font(.system(.body, design: .monospaced))
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                
+                        .frame(width: 240, height: 60)
+                        .background(Color("buttonColor"))
+                        .foregroundColor(.black)
+                        .cornerRadius(12)
+                        .clipShape(Rectangle())
+                        .shadow(color: .gray, radius: 2, x: -5, y: 5)
                 }
-                
                 
                 Button(action: {
                     dismiss()
@@ -59,13 +60,13 @@ struct ScoreSheetView: View {
                 }) {
                     Text("Chords Guide")
                         .font(.system(.body, design: .monospaced))
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .frame(width: 240, height: 60)
+                        .background(Color("buttonColor"))
+                        .foregroundColor(.black)
+                        .cornerRadius(12)
+                        .clipShape(Rectangle())
+                        .shadow(color: .gray, radius: 2, x: -5, y: 5)
                 }
-               
                     
                     Button(action: {
                         dismiss()
@@ -73,22 +74,23 @@ struct ScoreSheetView: View {
                     }) {
                         Text("Sair")
                             .font(.system(.body, design: .monospaced))
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .frame(width: 240, height: 60)
+                            .background(Color("buttonColor"))
+                            .foregroundColor(.black)
+                            .cornerRadius(12)
+                            .clipShape(Rectangle())
+                            .shadow(color: .gray, radius: 2, x: -5, y: 5)
+                        
                     }
-                 
-                    .padding()
-                    
-                    Spacer()
                 }
-                .frame(width: 350, height: 500)  // Ajuste o tamanho da Sheet
-                .background(Color.gray.opacity(0.2)) // Fundo cinza levemente
-                .cornerRadius(20) // Bordas arredondadas
-                .shadow(radius: 10) // Sombras para dar efeito de painel
+                    .padding(.leading, 300)
+                
+                Spacer()
             }
+            .frame(width: 600, height: 300)  // Ajuste o tamanho da Sheet
+            
         }
+
+    
 }
 

@@ -88,9 +88,8 @@ struct ChordsGuideView: View {
                             .font(.title)
                             .foregroundColor(.blue)
                         
-                        Text(" A triad is a chord made up of three notes, with a third interval between them")
-                            .font(.largeTitle)
-                            .padding()
+                        Text(" A triad is a chord made up of three notes, with a third interval between them.")
+                            .font(.system(.body, design: .monospaced))
                         
                         // Loop para criar a lista de acordes
                         ForEach(chords.keys.sorted(), id: \.self) { chord in
@@ -128,12 +127,14 @@ struct ChordsGuideView: View {
                 Button(action: {
                     path.append(Fluxo.StartGame)                }) {
                     Text("Start")
-                        .font(.system(.body, design: .monospaced))
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                            .font(.system(.body, design: .monospaced))
+                            .frame(width: 240, height: 60)
+                            .background(Color("buttonColor"))
+                            .foregroundColor(.black)
+                            .cornerRadius(12)
+                            .clipShape(Rectangle())
+                            .shadow(color: .gray, radius: 2, x: -5, y: 5)
+                        
                 }
                 .padding()
             }

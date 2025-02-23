@@ -251,7 +251,7 @@ struct BotoesNotas: View {
         let correctSet = Set(correctSequence)
         
         if userSet == correctSet {
-            message = "Thank youuuuuuu🎉"
+            message = "Thank you!"
             actionMoveParachutist(true) // Move o paraquedista para a posição correta em caso de acerto
            
         } else {

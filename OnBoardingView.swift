@@ -49,17 +49,15 @@ struct OnBoardingView: View {
                         Button(action: {
                             path.append(Fluxo.HowToPlay)
                         }) {
-                            Text("How\n to play")
+                            Text("How to play")
                                 .font(.system(.body, design: .monospaced))
-                                .frame(width: 400, height: 120, alignment: .center)
-                                .background(Color.accentColor)
-                                .foregroundColor(.white)
-                                .cornerRadius(50)
-                                .clipShape(Circle()) // Forma circular
-                                .overlay(
-                                    Circle().stroke(Color("buttonColor1"), lineWidth: 2) // Borda do botão
-                                )
-                                .shadow(color: .gray, radius: 2, x: -5, y: 5) // Sombra
+                                .frame(width: 240, height: 60)
+                                .background(Color("buttonColor"))
+                                .foregroundColor(.black)
+                                .cornerRadius(12)
+                                .clipShape(Rectangle())
+                                .shadow(color: .gray, radius: 2, x: -5, y: 5)
+                            
                             
                         }
                         Button(action: {
@@ -67,15 +65,13 @@ struct OnBoardingView: View {
                         }) {
                             Text("PLAY")
                                 .font(.system(.body, design: .monospaced))
-                                .frame(width: 400, height: 180)
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(50)
-                                .clipShape(Circle()) // Forma circular
-                                .overlay(
-                                    Circle().stroke(Color("buttonColor1"), lineWidth: 2) // Borda do botão
-                                )
-                                .shadow(color: .gray, radius: 2, x: -5, y: 5) // Sombra
+                                .frame(width: 240, height: 60)
+                                .background(Color("buttonColor"))
+                                .foregroundColor(.black)
+                                .cornerRadius(12)
+                                .clipShape(Rectangle())
+                                .shadow(color: .gray, radius: 2, x: -5, y: 5)
+                            
                         }
                         .navigationDestination(for: Fluxo.self ){
                             fluxo in switch fluxo {
@@ -93,8 +89,8 @@ struct OnBoardingView: View {
                     
                 }
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                                  .padding(.trailing, -20)
-                                  .padding(.bottom, 40)
+                                  .padding(.trailing, 80)
+                                  .padding(.bottom, 80)
                     .navigationDestination(for: Fluxo.self ){
                         fluxo in switch fluxo {
                         case .FirstView:

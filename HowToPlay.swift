@@ -46,11 +46,13 @@ struct HowToPlay: View {
                 }) {
                     Text("PLAY")
                         .font(.system(.body, design: .monospaced))
-                        .padding()
-                        .frame(width: 400, height: 50)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .frame(width: 240, height: 60)
+                        .background(Color("buttonColor"))
+                        .foregroundColor(.black)
+                        .cornerRadius(12)
+                        .clipShape(Rectangle())
+                        .shadow(color: .gray, radius: 2, x: -5, y: 5)
+                    
                 }
                 
                 
@@ -60,12 +62,13 @@ struct HowToPlay: View {
                     Text("Chords Guide")
                         
                         .font(.system(.body, design: .monospaced))
-                        .padding()
-                        .frame(width: 400, height: 50)
-                        .background(Color.accentColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-
+                        .frame(width: 240, height: 60)
+                        .background(Color("buttonColor"))
+                        .foregroundColor(.black)
+                        .cornerRadius(12)
+                        .clipShape(Rectangle())
+                        .shadow(color: .gray, radius: 2, x: -5, y: 5)
+                    
                 }
                 
             }

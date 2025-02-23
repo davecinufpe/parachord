@@ -21,7 +21,7 @@ struct MainGameView: View {
     
     @State var attempts: Int = 0
     @State var correctAttempts: Int = 0
-    let ATTEMPT_COUNTER: Int = 5
+    let ATTEMPT_COUNTER: Int = 1
     @State var scoreSheet: Bool = false
 
     let BOUNCE_HEIGHT: CGFloat = 20 // Raio do balanço
@@ -130,6 +130,7 @@ struct MainGameView: View {
         
         
         if isCorrect {
+          
             parachutistImage = "paraquedista_com_paraquedas_aberto"
             correctAttempts += 1
             
