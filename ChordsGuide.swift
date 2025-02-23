@@ -43,23 +43,19 @@ struct ChordsGuideView: View {
                     .background(Color.accentColor.opacity(0.2))
                     .cornerRadius(8)
                     .foregroundColor(.black)
-//                    .padding(.trailing, 520)
+
 
                 
                 ScrollView {
 
                     
                     VStack {
-                        Text("Trust me, it's easy! First, we need to understand that each button represents a note. The interval between them is a semitone. \nSince my parachute is only released with major chords, it’s important to know that a major chord consists of: \nThe root, which shares its name with the chord being formed. \nThe third, an interval of 4 semitones from the root. \nThe fifth, an interval of 3 semitones from the third.")
-                            .font(.system(size: 16))
-                            .font(.title)
+                        Text("Each button here represents a note and the interval between them is a semitone. \nSince Josh's parachute is only released with major chords, it’s important to know that a major chord consists of: \nThe root, which shares its name with the chord being formed. \nThe third, an interval of 4 semitones from the root. \nThe fifth, an interval of 3 semitones from the third.")
+                            .font(.custom(MyCustomFonts.secondFont.fontName, size: 18))
                             .foregroundStyle(Color("buttonColor2"))
                            
                         
-                    }.border(.red)
-                    
-
-                    
+                    }
                     
                     HStack {
                         

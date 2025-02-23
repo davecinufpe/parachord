@@ -8,11 +8,17 @@
 import SwiftUI
 
 class customFontLoader {
- @MainActor static let shared = FontLoader()
+    @MainActor static let shared = FontLoader()
 
- func customFont() {
-  if let cfURL = Bundle.main.url(forResource: "BungeeShade-Regular", withExtension: "ttf") as CFURL? {
-   CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
-  }
- }
+    func loadFirstFont() {
+        if let cfURL = Bundle.main.url(forResource: "BungeeShade-Regular", withExtension: "ttf") as CFURL? {
+            CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
+        }
+    }
+
+    func loadSecondFont() {
+        if let cfURL = Bundle.main.url(forResource: "IBMPlexMono-Regular", withExtension: "ttf") as CFURL? {
+            CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
+        }
+    }
 }

@@ -18,7 +18,7 @@ struct CloudsMovingView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geometry.size.width, height: geometry.size.height)
-                    .offset(x: self.moveToTheLeft ? geometry.size.width : 0) // Mover para a esquerda
+                    .offset(x: self.moveToTheLeft ? geometry.size.width : 0)
                     .animation(Animation.linear(duration: 30).repeatForever(autoreverses: false), value: moveToTheLeft)
                 
                 

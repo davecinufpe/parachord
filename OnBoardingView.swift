@@ -60,7 +60,7 @@ struct OnBoardingView: View {
                             .cornerRadius(12)
                             .clipShape(Rectangle())
                             .shadow(color: .gray, radius: 2, x: -5, y: 5)
-                        
+                         
                     }
                     Button(action: {
                         path.append(Fluxo.StartGame)

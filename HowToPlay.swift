@@ -10,6 +10,12 @@ import SwiftUI
 struct HowToPlay: View {
     
     @Binding var path: NavigationPath
+  
+    
+    @State var text: String = ""
+    @State var isAnimating: Bool = false
+    
+    let finalText: String = "Josh has developed an innovative parachute that opens to the sound of musical triads. \n \nEvery time he jumps, his device needs to detect 3 notes from a major chord to deploy the parachute. But he needs someone to play those notes for him. \n \nYou’re the lucky one! You’re Josh’s musical partner now! \n \nBut you gotta be fast, because time FLIES! \n \nHe needs to deploy his parachute within 5 jumps, with just 15 seconds for each one. \n \nIf you’ve landed here, we recommend checking out the Chord Guide before jumping into the game! \n \nIf you’re ready, let’s get started!!"
     
     var body: some View {
         
@@ -25,26 +31,32 @@ struct HowToPlay: View {
                     .background(Color.accentColor.opacity(0.2))
                     .cornerRadius(8)
                     .foregroundColor(.black)
-                    .padding(.trailing, 520)
+         
                 
                 Spacer()
                 
-                Text("Josh has developed an innovative parachute that opens to the sound of musical triads. \n \nEvery time he jumps, his device needs to detect 3 notes from a chord to deploy the parachute. But Josh can’t do that that when he is the air ... he needs someone needs to play those notes for him. \n \nYou’re the lucky one! You’re Josh’s musical partner now! \n \nBut you gotta be fast, because time flies! \n \nHe needs to deploy his parachute within 5 jumps, with just 15 seconds for each one. \n \nIf you’ve landed here, we recommend checking out the Chord Guide before jumping into the game!. \n \nIf you’re ready, let’s get started!!")
+                Text(text)
                 
-                    .font(.headline)
-                    .monospaced()
+                    .font(.custom(MyCustomFonts.secondFont.fontName, size: 18))
+                    .foregroundColor(Color.black)
                     .frame(width: 600, height: 400)
                     .cornerRadius(8)
-                    .foregroundColor(.black)
+                    .onAppear(){
+                        
+                        typeWriter()
+                        isAnimating = true
+                }
+                    
                
                 
-//                Image("skydiverFace")
-//                    .resizable()
-//                    .frame( width: 150, height: 300)
+                Image("airplane")
+                    .resizable()
+                    .frame( width: 650, height: 300)
+                    
                 
                 Spacer()
                
-                HStack {
+                HStack(spacing: 20){
                     Button(action: {
                         path.append(Fluxo.ChordsGuide)
                     }) {
@@ -82,5 +94,27 @@ struct HowToPlay: View {
                
         }
     }
+
+
+func typeWriter(at position: Int = 0) {
+      if position == 0 {
+          text = ""
+      }
+      if position < finalText.count {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.07) {
+              text.append(finalText[position])
+              typeWriter(at: position + 1)
+          }
+      }
+  }
+}
+
+
+
+
+extension String {
+  subscript(offset: Int) -> Character {
+      self[index(startIndex, offsetBy: offset)]
+  }
 }
 

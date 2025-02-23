@@ -146,7 +146,7 @@ struct BotoesNotas: View {
         }
         .onChange(of: parachutistPosition) { newPosition in
             if newPosition == CGPoint(x: 490, y: 100) {
-                resetTimer() // Reinicia o timer quando o paraquedista volta à posição inicial
+                resetTimer()
             }
         }
         .onChange(of: isGamePaused) { newValue in
@@ -155,12 +155,11 @@ struct BotoesNotas: View {
     }
     
     func pauseGame() {
-         isGamePaused = true // Impede interações com os botões e pausa o timer
-         timer?.invalidate() // Para o timer
+         isGamePaused = true
+         timer?.invalidate()
      }
     
     
-    // Função para reiniciar o timer
     func resetTimer() {
         remainingTime = 15
         timer?.invalidate() // Para o timer anterior, se houver
@@ -175,14 +174,14 @@ struct BotoesNotas: View {
                 if self.remainingTime > 1 {
                     self.remainingTime -= 1
                 } else {
-                    self.timer?.invalidate() // Para o timer quando chega a zero
+                    self.timer?.invalidate()
                     self.message = "Noooooooo"
                     parachutistPosition = CGPoint(x: 380, y: 1600)
                     actionMoveParachutist(false)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     self.resetTimer()
-                        self.generateNewSequence() // Gera uma nova sequência após o tempo esgotado
+                        self.generateNewSequence()
                     }
                 }
             }
@@ -191,8 +190,8 @@ struct BotoesNotas: View {
     
     func playAndFillCode(note: String) {
         let soundNote = mapNoteToSound(note: note)
-        notePlayer.play(note: soundNote) // Toca o som da nota
-        fillCode(letter: note) // Preenche o código com a nota
+        notePlayer.play(note: soundNote)
+        fillCode(letter: note)
     }
     
     func mapNoteToSound(note: String) -> String {

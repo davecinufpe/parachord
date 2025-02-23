@@ -24,9 +24,14 @@ import SwiftUI
 /// a case for each custom font you need as given in the example.
 enum MyCustomFonts: String, CaseIterable {
     
-    //e.g, the fonts below:
+    // Add your custom fonts here
     case textFont = "BungeeShade-Regular.ttf"
+    case secondFont = "IBMPlexMono-Regular.ttf"  // Adicionando a nova fonte
+    
+    // Get the font name by removing the ".ttf" extension
     var fontName: String { String(self.rawValue.dropLast(4)) }
+    
+    // Get the file extension (e.g. "ttf")
     var fileExtension: String { String(self.rawValue.suffix(3)) }
 }
 
