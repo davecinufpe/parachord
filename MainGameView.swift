@@ -14,14 +14,14 @@ struct MainGameView: View {
     @State private var parachutistImage = "skydiver" // Imagem inicial do paraquedista
     @State private var moveParachutist = false // Controla a animação de queda do paraquedista
     
-    @State var message: String = ""// Recebe a mensagem por binding
+    @State var message: String = ""
     @State var isGamePaused: Bool = false 
 
     @State private var firstTimer: Bool = true
     
     @State var attempts: Int = 0
     @State var correctAttempts: Int = 0
-    let ATTEMPT_COUNTER: Int = 1
+    let ATTEMPT_COUNTER: Int = 5
     @State var scoreSheet: Bool = false
 
     let BOUNCE_HEIGHT: CGFloat = 20 // Raio do balanço
@@ -29,7 +29,7 @@ struct MainGameView: View {
     @State private var isRotating: Bool = false
     @State private var angleDegrees: Double = 0.0
     
-//    @State private var rotationAngle: Angle = .degrees(0)
+
     
     @Binding var path: NavigationPath
 
@@ -75,7 +75,8 @@ struct MainGameView: View {
       
             ScoreSheetView(path: $path, resultText: "\(correctAttempts)/\(attempts)")
             
-}
+} 
+        
         
     }
    

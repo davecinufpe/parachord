@@ -7,79 +7,31 @@
 
 import SwiftUI
 
-struct CustomButtonWhiteNotesCG: View {
-    
-    
-    var title: String
-    var action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.system(size: 24))
-                .foregroundColor(.black)
-                .frame(width: 72, height: 72)
-                .background(Color.white)
-                .clipShape(Circle())
-                .overlay(
-                    Circle().stroke(Color("buttonColor1"), lineWidth: 2)
-                )
-                .shadow(color: .gray, radius: 5, x: -5, y: 5)
-        }
-    }
-}
-
-struct CustomButtonBlackNotesCG: View {
-    var title: String
-    var action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.system(size: 20)) // Ajuste o tamanho da letra
-                .foregroundColor(.accentColor) // Cor do texto
-                .frame(width: 72, height: 72) // Tamanho do botão
-                .background(Color("buttonColor2")) // Cor do fundo do botão
-                .clipShape(Circle()) // Forma circular
-                .overlay(
-                    Circle().stroke(Color("gray"), lineWidth: 2) // Borda do botão
-                )
-                .shadow(color: .gray, radius: 2, x: -5, y: 5) // Sombra
-        }
-    }
-}
-
 struct ChordsGuideView: View {
     
     @Binding var path: NavigationPath
     
-    // Adicionando os acordes acidentados (com # e b)
-    let chords: [String: [String]] = [
-        "C Major": ["C", "E", "G"],
-        "C# Major": ["C#", "F", "G#"], // Acorde acidentado C#
-        "D Major": ["D", "F#", "A"],
-        "D# Major": ["D#", "G", "A#"], // Acorde acidentado D#
-        "E Major": ["E", "G#", "B"],
-        "F Major": ["F", "A", "C"],
-        "F# Major": ["F#", "A#", "C#"], // Acorde acidentado F#
-        "G Major": ["G", "B", "D"],
-        "G# Major": ["G#", "C", "D#"], // Acorde acidentado G#
-        "A Major": ["A", "C#", "E"],
-        "A# Major": ["A#", "D", "F"], // Acorde acidentado A#
-        "B Major": ["B", "D#", "F#"]
+    let chordsWithImages: [(String, String)] = [
+        ("C Major", "image1"),
+           ("C# Major", "image2"),
+           ("D Major", "image3"),
+           ("D# Major", "image4"),
+           ("E Major", "image5"),
+           ("F Major", "image6"),
+           ("F# Major", "image7"),
+           ("G Major", "image8"),
+           ("G# Major", "image9"),
+           ("A Major", "image10"),
+           ("A# Major", "image11"),
+           ("B Major", "image12")
     ]
     
     var body: some View {
         
-        
         ZStack {
-            
-            
             Color("bg").edgesIgnoringSafeArea(.all)
             
-            
             VStack(spacing: 16) {
-                
                 
                 ScrollView {
                     VStack(spacing: 20) {
@@ -88,53 +40,38 @@ struct ChordsGuideView: View {
                             .font(.title)
                             .foregroundColor(.blue)
                         
-                        Text(" A triad is a chord made up of three notes, with specific intervals between them.")
+                        Text(" Trust me, it's easy! First, we need to understand that each button represents a note. The interval between them is a semitone. \n Since my parachute is only released with major chords, it’s important to know that a major chord consists of: \n The root, which shares its name with the chord being formed. \n The third, an interval of 4 semitones from the root. \n The fifth, an interval of 3 semitones from the third.")
                             .font(.system(.body, design: .monospaced))
                         
-                        // Loop para criar a lista de acordes
-                        ForEach(chords.keys.sorted(), id: \.self) { chord in
-                            HStack  {
-                                // Imagem do avião
-                                Image("airplane")
+                      ForEach(chordsWithImages, id: \.0) { word, imageName in
+                            HStack {
+                              
+                                Text(word)
+                                    .font(.title)
+                                    .foregroundColor(.blue)
+                                
+                                Image(imageName)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 80, height: 80)
                                 
-                                // Exibe o nome do acorde
-                                Text(chord)
-                                    .font(.title)
-                                    .foregroundColor(.blue)
-                                
-                                // Exibe as notas do acorde
-                                ForEach(chords[chord]!, id: \.self) { note in
-                                    // Verifica se a nota é acidentada (com sustenido ou bemol)
-                                    if note.contains("#") || note.contains("b") {
-                                        CustomButtonBlackNotesCG(title: note) {
-                                            // Ação do botão de nota acidentada
-                                        }
-                                    } else {
-                                        CustomButtonWhiteNotesCG(title: note) {
-                                            // Ação do botão de nota natural@                                        }
-                                        }
-                                    }
-                                }
-                                .padding(.horizontal)
                             }
+                            .padding(.horizontal)
                         }
-                        
                     }
-                }//
+                }
+                
                 Button(action: {
-                    path.append(Fluxo.StartGame)                }) {
+                    path.append(Fluxo.StartGame)
+                }) {
                     Text("Start")
-                            .font(.system(.body, design: .monospaced))
-                            .frame(width: 240, height: 60)
-                            .background(Color("buttonColor"))
-                            .foregroundColor(.black)
-                            .cornerRadius(12)
-                            .clipShape(Rectangle())
-                            .shadow(color: .gray, radius: 2, x: -5, y: 5)
-                        
+                        .font(.system(.body, design: .monospaced))
+                        .frame(width: 240, height: 60)
+                        .background(Color("buttonColor"))
+                        .foregroundColor(.black)
+                        .cornerRadius(12)
+                        .clipShape(Rectangle())
+                        .shadow(color: .gray, radius: 2, x: -5, y: 5)
                 }
                 .padding()
             }
